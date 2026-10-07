@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://avancemoscol.github.io/cesar-santana-gereda/sitemap-index.xml

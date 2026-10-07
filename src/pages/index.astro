@@ -1,0 +1,259 @@
+---
+import Base from '../layouts/Base.astro';
+
+const skills = [
+  { group: 'Diseño e ingeniería', items: ['SolidWorks', 'ANSYS', 'AutoCAD', 'Inventor', 'Solid Edge', 'MATLAB', 'Revit'] },
+  { group: 'Datos y Python', items: ['pandas', 'NumPy', 'matplotlib', 'seaborn', 'scikit-learn', 'SciPy', 'Machine Learning'] },
+  { group: 'Desarrollo web', items: ['JavaScript', 'React', 'Node.js', 'HTML / CSS', 'PHP', 'Astro', 'Flutter'] },
+  { group: 'Bases de datos', items: ['MySQL', 'PostgreSQL', 'MongoDB'] },
+];
+const experience = [
+  { when: '2021 – Actualidad', role: 'Maestro autónomo', org: 'Profesional independiente', text: 'Programas educativos a la medida, asesoría académica personalizada y formación especializada para instituciones y empresas.' },
+  { when: '2019 – Actualidad', role: 'Diseñador y consultor de ingeniería', org: 'Freelance', text: 'Diseño mecánico, simulación y análisis de datos para proyectos de ingeniería.' },
+  { when: '2023', role: 'Instructor de robótica STEAM', org: 'ConexaLab', text: 'Formación a niños con el kit de robótica Octabio para fomentar habilidades tecnológicas y creativas.' },
+  { when: '2016 – 2020', role: 'Auxiliar docente y administrativo', org: 'Universidad Industrial de Santander', text: 'Asesoría académica individualizada en cálculo y cursos de ingeniería.' },
+];
+const projects = [
+  { name: 'Lired', tag: 'Red social', text: 'Plataforma de red social desarrollada de punta a punta.' },
+  { name: 'Apinux', tag: 'API', text: 'API de imágenes para consumo desde aplicaciones web.' },
+  { name: 'Fabio', tag: 'Educación', text: 'Plataforma personalizada para aprender vocabulario en inglés.' },
+  { name: 'VTH, centrifugadora y domo', tag: 'Ingeniería', text: 'Vehículo de tracción humana, centrifugadora de miel y domo geodésico.' },
+  { name: 'Sistema agroforestal de cacao', tag: 'Datos', text: 'Análisis de datos para captura de carbono en cultivos de cacao.' },
+];
+const education = [
+  'Ingeniería Mecánica · Universidad Industrial de Santander',
+  'Diplomado en Desarrollo de Software · Universidad del Norte (MinTIC)',
+  'Diplomado en Desarrollo de Aplicaciones Móviles · Universidad del Norte (MinTIC)',
+  'Científico de Datos, Machine Learning, Pandas y NumPy · Platzi',
+];
+---
+<Base>
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <header class="nav">
+    <a href="#inicio" class="logo">CS</a>
+    <nav aria-label="Principal">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#contacto" class="cta">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">Bucaramanga, Colombia</p>
+        <h1>César Andrés<br /><span class="grad">Santana Gereda</span></h1>
+        <p class="typing">Ingeniero Mecánico · <span id="typed"></span><span class="caret">|</span></p>
+        <p class="lead">Combino ingeniería mecánica, análisis de datos y desarrollo web para diseñar soluciones que funcionan, de la simulación a la aplicación en producción.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#contacto">Hablemos</a>
+          <a class="btn" href="#proyectos">Ver proyectos</a>
+        </div>
+      </div>
+      <div class="photo">
+        <img src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/cesar.jpg`} width="400" height="400" alt="César Andrés Santana Gereda, ingeniero mecánico y desarrollador web" fetchpriority="high" />
+      </div>
+    </section>
+
+    <section id="sobre-mi" class="reveal">
+      <h2>Sobre mí</h2>
+      <p>Soy César Andrés Santana Gereda, ingeniero mecánico apasionado por la mejora continua de procesos y la innovación en el diseño. Soy autodidacta y me adapto rápido a nuevas tecnologías y desafíos.</p>
+      <p>Trabajo como diseñador e instructor independiente y fui asesor académico durante mi formación universitaria. Hoy sumo desarrollo web, ciencia de datos y machine learning a mi perfil de ingeniería.</p>
+      <ul class="stats">
+        <li><strong data-count="10">0</strong><span>años de docencia y asesoría</span></li>
+        <li><strong data-count="5">0</strong><span>proyectos destacados</span></li>
+        <li><strong data-count="13">0</strong><span>certificaciones</span></li>
+      </ul>
+    </section>
+
+    <section id="experiencia" class="reveal">
+      <h2>Experiencia</h2>
+      <ol class="timeline">
+        {experience.map((e) => (
+          <li>
+            <span class="when">{e.when}</span>
+            <h3>{e.role} <small>· {e.org}</small></h3>
+            <p>{e.text}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section id="proyectos" class="reveal">
+      <h2>Proyectos</h2>
+      <div class="grid">
+        {projects.map((p) => (
+          <article class="card tilt">
+            <span class="tag">{p.tag}</span>
+            <h3>{p.name}</h3>
+            <p>{p.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="habilidades" class="reveal">
+      <h2>Habilidades</h2>
+      <div class="grid skills">
+        {skills.map((s) => (
+          <div class="card">
+            <h3>{s.group}</h3>
+            <ul class="chips">{s.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="educacion" class="reveal">
+      <h2>Educación y certificaciones</h2>
+      <ul class="edu">{education.map((e) => <li>{e}</li>)}</ul>
+      <p class="muted">Idiomas: español nativo, inglés A2.</p>
+    </section>
+
+    <section id="contacto" class="reveal contact">
+      <h2>Contacto</h2>
+      <p>¿Tienes un proyecto de ingeniería, datos o web? Escríbeme.</p>
+      <div class="buttons">
+        <a class="btn primary" href="mailto:casgereda.1@gmail.com">casgereda.1@gmail.com</a>
+        <a class="btn" href="https://www.linkedin.com/in/césar-andres-santana-gereda-01381b122" rel="me noopener" target="_blank">LinkedIn</a>
+        <a class="btn" href="https://github.com/andressantage" rel="me noopener" target="_blank">GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>© {new Date().getFullYear()} César Andrés Santana Gereda · Bucaramanga, Colombia</footer>
+
+  <style is:global>
+    :root { --bg:#0b1020; --card:#121935; --text:#e8ecff; --muted:#9aa5d1; --a:#6ee7f9; --b:#a78bfa; }
+    * { box-sizing:border-box; margin:0; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--bg); color:var(--text); font:17px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+    #bg { position:fixed; inset:0; z-index:-1; width:100%; height:100%; }
+    a { color:inherit; text-decoration:none; }
+    main, .nav, footer { max-width:1040px; margin-inline:auto; padding-inline:20px; }
+    section { padding-block:72px; }
+    h2 { font-size:2rem; margin-bottom:20px; }
+    h2::after { content:""; display:block; width:56px; height:4px; margin-top:8px; border-radius:4px; background:linear-gradient(90deg,var(--a),var(--b)); }
+    p + p { margin-top:12px; }
+    .nav { position:sticky; top:0; z-index:10; display:flex; justify-content:space-between; align-items:center; padding-block:14px; backdrop-filter:blur(12px); background:rgba(11,16,32,.6); max-width:none; padding-inline:max(20px,calc((100% - 1040px)/2 + 20px)); }
+    .logo { font-weight:800; font-size:1.2rem; padding:6px 12px; border-radius:10px; background:linear-gradient(135deg,var(--a),var(--b)); color:#0b1020; }
+    .nav nav { display:flex; gap:18px; align-items:center; font-size:.95rem; }
+    .nav nav a:hover { color:var(--a); }
+    .nav .cta { padding:6px 14px; border:1px solid var(--a); border-radius:999px; }
+    .hero { min-height:88vh; display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:center; }
+    .eyebrow { color:var(--a); letter-spacing:.12em; text-transform:uppercase; font-size:.85rem; }
+    h1 { font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.1; margin:8px 0 14px; }
+    .grad { background:linear-gradient(90deg,var(--a),var(--b)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .typing { font-size:1.25rem; color:var(--muted); min-height:1.8em; }
+    .caret { animation:blink 1s steps(1) infinite; color:var(--a); }
+    @keyframes blink { 50% { opacity:0; } }
+    .lead { margin-top:14px; color:var(--muted); max-width:52ch; }
+    .buttons { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+    .btn { padding:12px 22px; border-radius:999px; border:1px solid rgba(255,255,255,.2); transition:transform .2s, box-shadow .2s; }
+    .btn:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(110,231,249,.25); }
+    .btn.primary { background:linear-gradient(135deg,var(--a),var(--b)); color:#0b1020; font-weight:700; border:0; }
+    .photo { justify-self:center; padding:6px; border-radius:50%; background:conic-gradient(from 0deg,var(--a),var(--b),var(--a)); animation:spin 8s linear infinite; }
+    .photo img { display:block; width:min(320px,70vw); height:auto; aspect-ratio:1; object-fit:cover; border-radius:50%; border:6px solid var(--bg); animation:spin 8s linear infinite reverse; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .stats { display:flex; flex-wrap:wrap; gap:16px; list-style:none; padding:0; margin-top:28px; }
+    .stats li { flex:1 1 180px; background:var(--card); padding:18px; border-radius:16px; }
+    .stats strong { display:block; font-size:2.2rem; color:var(--a); }
+    .stats strong::after { content:"+"; }
+    .stats span, .muted { color:var(--muted); font-size:.95rem; }
+    .timeline { list-style:none; padding:0 0 0 22px; border-left:2px solid rgba(167,139,250,.4); }
+    .timeline li { position:relative; padding:0 0 28px 18px; }
+    .timeline li::before { content:""; position:absolute; left:-30px; top:8px; width:14px; height:14px; border-radius:50%; background:var(--a); box-shadow:0 0 12px var(--a); }
+    .when { color:var(--a); font-size:.85rem; }
+    .timeline h3 small { font-weight:400; color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+    .card { background:var(--card); padding:22px; border-radius:18px; border:1px solid rgba(255,255,255,.06); transition:transform .15s ease, border-color .2s; will-change:transform; }
+    .card:hover { border-color:var(--a); }
+    .tag { font-size:.75rem; padding:2px 10px; border-radius:999px; background:rgba(167,139,250,.2); color:var(--b); }
+    .card h3 { margin:10px 0 6px; }
+    .card p { color:var(--muted); font-size:.95rem; }
+    .chips { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .chips li { padding:3px 12px; border-radius:999px; background:rgba(110,231,249,.1); color:var(--a); font-size:.88rem; }
+    .edu { padding-left:20px; }
+    .edu li { margin-bottom:6px; }
+    .contact { text-align:center; }
+    .contact h2::after { margin-inline:auto; }
+    .contact .buttons { justify-content:center; }
+    footer { text-align:center; color:var(--muted); font-size:.9rem; padding-block:32px; }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s, transform .7s; }
+    .reveal.in { opacity:1; transform:none; }
+    @media (max-width:760px) { .hero { grid-template-columns:1fr; text-align:center; padding-top:30px; } .lead { margin-inline:auto; } .buttons { justify-content:center; } .photo { order:-1; } .nav nav a:not(.cta) { display:none; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; } .reveal { opacity:1; transform:none; } }
+    @media (scripting:none) { .reveal { opacity:1; transform:none; } }
+  </style>
+
+  <script>
+    // Texto animado
+    const words = ['Desarrollador Web', 'Analista de Datos', 'Diseñador CAD', 'Docente'];
+    const el = document.getElementById('typed')!;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) el.textContent = words[0];
+    else {
+      let w = 0, c = 0, del = false;
+      const tick = () => {
+        const word = words[w];
+        el.textContent = word.slice(0, c);
+        if (!del && c === word.length) { del = true; return setTimeout(tick, 1400); }
+        if (del && c === 0) { del = false; w = (w + 1) % words.length; }
+        c += del ? -1 : 1;
+        setTimeout(tick, del ? 40 : 80);
+      };
+      tick();
+    }
+
+    // Aparición al hacer scroll y contadores
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        e.target.classList.add('in');
+        e.target.querySelectorAll<HTMLElement>('[data-count]').forEach((n) => {
+          const target = Number(n.dataset.count);
+          let v = 0;
+          const step = setInterval(() => { v++; n.textContent = String(v); if (v >= target) clearInterval(step); }, 90);
+        });
+        io.unobserve(e.target);
+      }
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((s) => io.observe(s));
+
+    // Inclinación 3D en tarjetas
+    if (!reduce) document.querySelectorAll<HTMLElement>('.tilt').forEach((card) => {
+      card.addEventListener('mousemove', (ev) => {
+        const r = card.getBoundingClientRect();
+        const x = (ev.clientX - r.left) / r.width - 0.5, y = (ev.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(600px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
+      });
+      card.addEventListener('mouseleave', () => (card.style.transform = ''));
+    });
+
+    // Fondo de partículas
+    const cv = document.getElementById('bg') as HTMLCanvasElement;
+    const ctx = cv.getContext('2d')!;
+    let W = 0, H = 0;
+    const pts = Array.from({ length: 60 }, () => ({ x: Math.random(), y: Math.random(), vx: (Math.random() - .5) * 2e-4, vy: (Math.random() - .5) * 2e-4 }));
+    const resize = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; };
+    addEventListener('resize', resize); resize();
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of pts) { p.x = (p.x + p.vx + 1) % 1; p.y = (p.y + p.vy + 1) % 1; }
+      for (let i = 0; i < pts.length; i++) {
+        const a = pts[i];
+        ctx.fillStyle = 'rgba(110,231,249,.6)';
+        ctx.fillRect(a.x * W, a.y * H, 2, 2);
+        for (let j = i + 1; j < pts.length; j++) {
+          const b = pts[j], d = Math.hypot((a.x - b.x) * W, (a.y - b.y) * H);
+          if (d < 140) { ctx.strokeStyle = `rgba(167,139,250,${.25 * (1 - d / 140)})`; ctx.beginPath(); ctx.moveTo(a.x * W, a.y * H); ctx.lineTo(b.x * W, b.y * H); ctx.stroke(); }
+        }
+      }
+      if (!reduce) requestAnimationFrame(draw);
+    };
+    draw();
+  </script>
+</Base>

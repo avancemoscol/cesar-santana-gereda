@@ -46,7 +46,7 @@ const education = [
       <div class="hero-text">
         <p class="eyebrow">Bucaramanga, Colombia</p>
         <h1>César Andrés<br /><span class="grad">Santana Gereda</span></h1>
-        <p class="typing">Ingeniero Mecánico · <span id="typed"></span><span class="caret">|</span></p>
+        <p class="typing"><span class="role">Ingeniero Mecánico</span><span class="typed-line"><span id="typed"></span><span class="caret">|</span></span></p>
         <p class="lead">Combino ingeniería mecánica, análisis de datos y desarrollo web para diseñar soluciones que funcionan, de la simulación a la aplicación en producción.</p>
         <div class="buttons">
           <a class="btn primary" href="#contacto">Hablemos</a>
@@ -147,7 +147,9 @@ const education = [
     .eyebrow { color:var(--a); letter-spacing:.12em; text-transform:uppercase; font-size:.85rem; }
     h1 { font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.1; margin:8px 0 14px; }
     .grad { background:linear-gradient(90deg,var(--a),var(--b)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-    .typing { font-size:1.25rem; color:var(--muted); min-height:1.8em; }
+    .typing { font-size:1.25rem; color:var(--muted); }
+    .typing .role, .typing .typed-line { display:block; height:1.8em; line-height:1.8em; white-space:nowrap; overflow:hidden; }
+    .typed-line { color:var(--a); }
     .caret { animation:blink 1s steps(1) infinite; color:var(--a); }
     @keyframes blink { 50% { opacity:0; } }
     .lead { margin-top:14px; color:var(--muted); max-width:52ch; }

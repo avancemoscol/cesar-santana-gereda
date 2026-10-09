@@ -13,6 +13,10 @@ const experience = [
   { when: '2023', role: 'Instructor de robótica STEAM', org: 'ConexaLab', text: 'Formación a niños con el kit de robótica Octabio para fomentar habilidades tecnológicas y creativas.' },
   { when: '2016 – 2020', role: 'Auxiliar docente y administrativo', org: 'Universidad Industrial de Santander', text: 'Asesoría académica individualizada en cálculo y cursos de ingeniería.' },
 ];
+const featured = [
+  { name: 'Automatizador de acuses de facturas DIAN', client: 'BELT', tag: 'Automatización', text: 'Sistema que automatiza el acuse de recibo de facturas electrónicas ante la DIAN, para eliminar el trabajo manual y los errores de gestión.', chips: ['Facturación electrónica', 'DIAN', 'Automatización de procesos'] },
+  { name: 'Sistema de contabilidad empresarial', client: 'BELT', tag: 'Software a la medida', text: 'Sistema para llevar la contabilidad de la empresa, con registro y control centralizado de la información financiera.', chips: ['Contabilidad', 'Aplicación web', 'Bases de datos'] },
+];
 const projects = [
   { name: 'Lired', tag: 'Red social', text: 'Plataforma de red social desarrollada de punta a punta.' },
   { name: 'Apinux', tag: 'API', text: 'API de imágenes para consumo desde aplicaciones web.' },
@@ -47,7 +51,7 @@ const education = [
         <p class="eyebrow">Bucaramanga, Colombia</p>
         <h1>César Andrés<br /><span class="grad">Santana Gereda</span></h1>
         <p class="typing"><span class="role">Ingeniero Mecánico</span><span class="typed-line"><span id="typed"></span><span class="caret">|</span></span></p>
-        <p class="lead">Combino ingeniería mecánica, análisis de datos y desarrollo web para diseñar soluciones que funcionan, de la simulación a la aplicación en producción.</p>
+        <p class="lead">Ingeniero mecánico y desarrollador que automatiza procesos empresariales con software, datos e inteligencia artificial: soluciones reales para empresas reales.</p>
         <div class="buttons">
           <a class="btn primary" href="#contacto">Hablemos</a>
           <a class="btn" href="#proyectos">Ver proyectos</a>
@@ -83,7 +87,18 @@ const education = [
     </section>
 
     <section id="proyectos" class="reveal">
-      <h2>Proyectos</h2>
+      <h2>Proyectos destacados</h2>
+      <div class="featured">
+        {featured.map((f) => (
+          <article class="card feat tilt">
+            <div class="feat-top"><span class="tag">{f.tag}</span><span class="client">Cliente: {f.client}</span></div>
+            <h3>{f.name}</h3>
+            <p>{f.text}</p>
+            <ul class="chips">{f.chips.map((c) => <li>{c}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+      <h3 class="sub">Otros proyectos</h3>
       <div class="grid">
         {projects.map((p) => (
           <article class="card tilt">
@@ -170,6 +185,12 @@ const education = [
     .timeline li::before { content:""; position:absolute; left:-30px; top:8px; width:14px; height:14px; border-radius:50%; background:var(--a); box-shadow:0 0 12px var(--a); }
     .when { color:var(--a); font-size:.85rem; }
     .timeline h3 small { font-weight:400; color:var(--muted); }
+    .featured { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:20px; }
+    .feat { padding:28px; background:linear-gradient(160deg,rgba(110,231,249,.08),var(--card) 55%); border-color:rgba(110,231,249,.25); }
+    .feat h3 { font-size:1.25rem; }
+    .feat-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .client { font-size:.8rem; color:var(--muted); }
+    .sub { margin:36px 0 14px; color:var(--muted); font-size:1.05rem; font-weight:600; }
     .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
     .card { background:var(--card); padding:22px; border-radius:18px; border:1px solid rgba(255,255,255,.06); transition:transform .15s ease, border-color .2s; will-change:transform; }
     .card:hover { border-color:var(--a); }
@@ -193,7 +214,7 @@ const education = [
 
   <script>
     // Texto animado
-    const words = ['Desarrollador Web', 'Analista de Datos', 'Diseñador CAD', 'Docente'];
+    const words = ['Automatización de procesos', 'Desarrollador Web', 'Analista de Datos', 'Diseñador CAD', 'Docente'];
     const el = document.getElementById('typed')!;
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) el.textContent = words[0];

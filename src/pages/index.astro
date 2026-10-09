@@ -17,6 +17,12 @@ const featured = [
   { name: 'Automatizador de acuses de facturas DIAN', client: 'BELT', tag: 'Automatización', text: 'Sistema que automatiza el acuse de recibo de facturas electrónicas ante la DIAN, para eliminar el trabajo manual y los errores de gestión.', chips: ['Facturación electrónica', 'DIAN', 'Automatización de procesos'] },
   { name: 'Sistema de contabilidad empresarial', client: 'BELT', tag: 'Software a la medida', text: 'Sistema para llevar la contabilidad de la empresa, con registro y control centralizado de la información financiera.', chips: ['Contabilidad', 'Aplicación web', 'Bases de datos'] },
 ];
+const lab = [
+  { name: 'Extractor de facturas con IA', text: 'Lee el texto de una factura, extrae NIT, número, fecha y montos con un modelo de lenguaje y valida que subtotal + IVA = total.', chips: ['Python', 'LLM', 'Validación contable'] },
+  { name: 'Clasificador de documentos', text: 'Clasifica documentos empresariales (factura, cotización, contrato) con IA y reglas de respaldo.', chips: ['Python', 'LLM', 'Clasificación'] },
+  { name: 'Asistente contable', text: 'Sugiere la cuenta PUC de cada movimiento de un extracto bancario en CSV.', chips: ['Python', 'LLM', 'PUC Colombia'] },
+];
+const labRepo = 'https://github.com/avancemoscol/automatizacion-ia';
 const projects = [
   { name: 'Lired', tag: 'Red social', text: 'Plataforma de red social desarrollada de punta a punta.' },
   { name: 'Apinux', tag: 'API', text: 'API de imágenes para consumo desde aplicaciones web.' },
@@ -95,6 +101,17 @@ const education = [
             <h3>{f.name}</h3>
             <p>{f.text}</p>
             <ul class="chips">{f.chips.map((c) => <li>{c}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+      <h3 class="sub">Laboratorio de automatización con IA <a class="repo" href={labRepo} target="_blank" rel="noopener">Ver código en GitHub ↗</a></h3>
+      <div class="grid">
+        {lab.map((l) => (
+          <article class="card tilt">
+            <span class="tag">Prototipo · Python</span>
+            <h3>{l.name}</h3>
+            <p>{l.text}</p>
+            <ul class="chips">{l.chips.map((c) => <li>{c}</li>)}</ul>
           </article>
         ))}
       </div>
@@ -191,6 +208,7 @@ const education = [
     .feat-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }
     .client { font-size:.8rem; color:var(--muted); }
     .sub { margin:36px 0 14px; color:var(--muted); font-size:1.05rem; font-weight:600; }
+    .repo { margin-left:10px; font-size:.85rem; font-weight:500; color:var(--a); }
     .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
     .card { background:var(--card); padding:22px; border-radius:18px; border:1px solid rgba(255,255,255,.06); transition:transform .15s ease, border-color .2s; will-change:transform; }
     .card:hover { border-color:var(--a); }

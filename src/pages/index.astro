@@ -1,24 +1,38 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const skills = [
-  { group: 'Diseño e ingeniería', items: ['SolidWorks', 'ANSYS', 'AutoCAD', 'Inventor', 'Solid Edge', 'MATLAB', 'Revit'] },
-  { group: 'Datos y Python', items: ['pandas', 'NumPy', 'matplotlib', 'seaborn', 'scikit-learn', 'SciPy', 'Machine Learning'] },
-  { group: 'Desarrollo web', items: ['JavaScript', 'React', 'Node.js', 'HTML / CSS', 'PHP', 'Astro', 'Flutter'] },
-  { group: 'Bases de datos', items: ['MySQL', 'PostgreSQL', 'MongoDB'] },
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const email = 'casgereda.1@gmail.com';
+const mailto = `mailto:${email}?subject=${encodeURIComponent('Quiero automatizar un proceso en mi empresa')}`;
+
+const words = ['automatización de procesos', 'soluciones con IA', 'sistemas contables', 'aplicaciones web'];
+
+const services = [
+  { icon: 'flow', title: 'Automatización de procesos', text: 'Elimino tareas manuales repetitivas: facturación electrónica, acuses ante la DIAN, conciliaciones y reportes.' },
+  { icon: 'spark', title: 'Soluciones con IA', text: 'Integro modelos de lenguaje para extraer datos de documentos, clasificarlos y apoyar decisiones, con validaciones que los hacen confiables.' },
+  { icon: 'ledger', title: 'Sistemas contables a la medida', text: 'Software para llevar la contabilidad de tu empresa, adaptado a cómo trabajas y no al revés.' },
+  { icon: 'code', title: 'Aplicaciones web y APIs', text: 'Desarrollo con JavaScript, Node.js, React, Python y bases de datos SQL y NoSQL.' },
 ];
-const experience = [
-  { when: '2021 – Actualidad', role: 'Maestro autónomo', org: 'Profesional independiente', text: 'Programas educativos a la medida, asesoría académica personalizada y formación especializada para instituciones y empresas.' },
-  { when: '2019 – Actualidad', role: 'Diseñador y consultor de ingeniería', org: 'Freelance', text: 'Diseño mecánico, simulación y análisis de datos para proyectos de ingeniería.' },
-  { when: '2023', role: 'Instructor de robótica STEAM', org: 'ConexaLab', text: 'Formación a niños con el kit de robótica Octabio para fomentar habilidades tecnológicas y creativas.' },
-  { when: '2016 – 2020', role: 'Auxiliar docente y administrativo', org: 'Universidad Industrial de Santander', text: 'Asesoría académica individualizada en cálculo y cursos de ingeniería.' },
+const icons: Record<string, string> = {
+  flow: '<path d="M4 6h6v4H4zM14 14h6v4h-6zM7 10v4a2 2 0 0 0 2 2h5"/><path d="M17 6h3v3M20 6l-5 5"/>',
+  spark: '<path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4z"/><path d="M18 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+  ledger: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/>',
+  code: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 6l-2 12"/>',
+};
+
+const steps = [
+  ['01', 'Diagnóstico', 'Entiendo tu proceso actual y dónde se pierde tiempo o dinero.'],
+  ['02', 'Prototipo', 'Construyo una versión funcional pequeña para validar la idea rápido.'],
+  ['03', 'Implementación', 'Desarrollo, pruebo e integro con tus herramientas y tu equipo.'],
+  ['04', 'Acompañamiento', 'Capacito a tu equipo y ajusto el sistema según el uso real.'],
 ];
+
 const featured = [
   { name: 'Automatizador de acuses de facturas DIAN', client: 'BELT', tag: 'Automatización', text: 'Sistema que automatiza el acuse de recibo de facturas electrónicas ante la DIAN, para eliminar el trabajo manual y los errores de gestión.', chips: ['Facturación electrónica', 'DIAN', 'Automatización de procesos'] },
   { name: 'Sistema de contabilidad con IA', client: 'BELT', tag: 'Software a la medida · IA', text: 'Sistema para llevar la contabilidad de la empresa, con registro y control centralizado de la información financiera e inteligencia artificial integrada para apoyar el trabajo contable.', chips: ['Contabilidad', 'Inteligencia artificial', 'Aplicación web'] },
 ];
 const lab = [
-  { name: 'Extractor de facturas con IA', text: 'Lee el texto de una factura, extrae NIT, número, fecha y montos con un modelo de lenguaje y valida que subtotal + IVA = total.', chips: ['Python', 'LLM', 'Validación contable'] },
+  { name: 'Extractor de facturas con IA', text: 'Extrae NIT, número, fecha y montos de una factura con un modelo de lenguaje y valida que subtotal + IVA = total.', chips: ['Python', 'LLM', 'Validación contable'] },
   { name: 'Clasificador de documentos', text: 'Clasifica documentos empresariales (factura, cotización, contrato) con IA y reglas de respaldo.', chips: ['Python', 'LLM', 'Clasificación'] },
   { name: 'Asistente contable', text: 'Sugiere la cuenta PUC de cada movimiento de un extracto bancario en CSV.', chips: ['Python', 'LLM', 'PUC Colombia'] },
 ];
@@ -30,293 +44,382 @@ const projects = [
   { name: 'VTH, centrifugadora y domo', tag: 'Ingeniería', text: 'Vehículo de tracción humana, centrifugadora de miel y domo geodésico.' },
   { name: 'Sistema agroforestal de cacao', tag: 'Datos', text: 'Análisis de datos para captura de carbono en cultivos de cacao.' },
 ];
-const services = [
-  { icon: '⚙️', title: 'Automatización de procesos', text: 'Elimino tareas manuales repetitivas: facturación electrónica, acuses ante la DIAN, conciliaciones y reportes.' },
-  { icon: '🤖', title: 'Soluciones con IA', text: 'Integro modelos de lenguaje para extraer datos de documentos, clasificarlos y apoyar decisiones, con validaciones para que sea confiable.' },
-  { icon: '📊', title: 'Sistemas contables a la medida', text: 'Software para llevar la contabilidad de tu empresa, adaptado a cómo trabajas y no al revés.' },
-  { icon: '🌐', title: 'Aplicaciones web y APIs', text: 'Desarrollo con JavaScript, Node.js, React, Python y bases de datos SQL y NoSQL.' },
+
+const skills = [
+  { group: 'Automatización e IA', items: ['Python', 'LLM / IA generativa', 'pandas', 'NumPy', 'scikit-learn', 'Machine Learning'] },
+  { group: 'Desarrollo web', items: ['JavaScript', 'Node.js', 'React', 'Astro', 'PHP', 'Flutter'] },
+  { group: 'Bases de datos', items: ['MySQL', 'PostgreSQL', 'MongoDB'] },
+  { group: 'Ingeniería', items: ['SolidWorks', 'ANSYS', 'AutoCAD', 'Inventor', 'MATLAB'] },
 ];
-const steps = [
-  ['01', 'Diagnóstico', 'Entiendo tu proceso actual y dónde se pierde tiempo o dinero.'],
-  ['02', 'Prototipo', 'Construyo una versión funcional pequeña para validar la idea rápido.'],
-  ['03', 'Implementación', 'Desarrollo, pruebo e integro con tus herramientas y tu equipo.'],
-  ['04', 'Acompañamiento', 'Capacito a tu equipo y ajusto el sistema según el uso real.'],
+const stats = [
+  ['10+', 'años enseñando y asesorando'],
+  ['10', 'proyectos desarrollados'],
+  ['13', 'certificaciones'],
+];
+const experience = [
+  { when: '2021 – hoy', role: 'Desarrollador y docente independiente', org: 'Profesional independiente', text: 'Automatización y software a la medida para empresas; programas de formación y asesoría académica personalizada.' },
+  { when: '2019 – hoy', role: 'Diseñador y consultor de ingeniería', org: 'Freelance', text: 'Diseño mecánico, simulación y análisis de datos para proyectos de ingeniería.' },
+  { when: '2023', role: 'Instructor de robótica STEAM', org: 'ConexaLab', text: 'Formación con el kit de robótica Octabio para fomentar habilidades tecnológicas y creativas.' },
+  { when: '2016 – 2020', role: 'Auxiliar docente y administrativo', org: 'Universidad Industrial de Santander', text: 'Asesoría académica individualizada en cálculo y cursos de ingeniería.' },
 ];
 const education = [
-  'Ingeniería Mecánica · Universidad Industrial de Santander',
-  'Diplomado en Desarrollo de Software · Universidad del Norte (MinTIC)',
-  'Diplomado en Desarrollo de Aplicaciones Móviles · Universidad del Norte (MinTIC)',
-  'Científico de Datos, Machine Learning, Pandas y NumPy · Platzi',
+  ['Ingeniería Mecánica', 'Universidad Industrial de Santander'],
+  ['Diplomado en Desarrollo de Software', 'Universidad del Norte · MinTIC'],
+  ['Diplomado en Aplicaciones Móviles', 'Universidad del Norte · MinTIC'],
+  ['Científico de Datos y Machine Learning', 'Platzi'],
 ];
 ---
 <Base>
-  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="bg" aria-hidden="true"></div>
 
   <header class="nav">
-    <a href="#inicio" class="logo">CS</a>
-    <nav aria-label="Principal">
-      <a href="#servicios">Servicios</a>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#sobre-mi">Sobre mí</a>
-      <a href="#experiencia">Experiencia</a>
-      <a href="#contacto" class="cta">Contacto</a>
-    </nav>
+    <div class="wrap nav-in">
+      <a href="#inicio" class="brand"><span class="mark">CS</span><span class="brand-name">César Santana</span></a>
+      <nav aria-label="Principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href={mailto} class="btn btn-sm primary">Contrátame</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="inicio" class="hero">
+    <section id="inicio" class="wrap hero">
       <div class="hero-text">
-        <p class="eyebrow">Disponible para proyectos · Bucaramanga, Colombia</p>
-        <h1>César Andrés<br /><span class="grad">Santana Gereda</span></h1>
-        <p class="typing"><span class="role">Ingeniero Mecánico</span><span class="typed-line"><span id="typed"></span><span class="caret">|</span></span></p>
-        <p class="lead">Ayudo a las empresas a ahorrar tiempo y reducir errores automatizando sus procesos con software, datos e inteligencia artificial.</p>
+        <p class="badge"><span class="dot"></span> Disponible para nuevos proyectos</p>
+        <h1>Automatizo los procesos de tu empresa con <span class="grad">software e IA</span>.</h1>
+        <p class="lead">
+          Soy <strong>César Andrés Santana Gereda</strong>, ingeniero mecánico y desarrollador en Bucaramanga, Colombia.
+          Especialista en
+          <span class="rotator" aria-label={words.join(', ')}>
+            {words.map((w, i) => <span class:list={['word', { on: i === 0 }]} aria-hidden="true">{w}</span>)}
+          </span>
+        </p>
         <div class="buttons">
-          <a class="btn primary" href="mailto:casgereda.1@gmail.com?subject=Quiero%20contratar%20un%20servicio%20de%20automatizaci%C3%B3n">Contrátame</a>
-          <a class="btn" href="#proyectos">Ver proyectos</a>
+          <a class="btn primary" href={mailto}>Hablemos de tu proyecto</a>
+          <a class="btn ghost" href="#proyectos">Ver proyectos</a>
         </div>
-        <ul class="trust"><li>Facturación electrónica DIAN</li><li>Contabilidad</li><li>IA aplicada</li></ul>
+        <ul class="trust">
+          <li>Facturación electrónica DIAN</li>
+          <li>Contabilidad</li>
+          <li>IA aplicada</li>
+        </ul>
       </div>
-      <div class="photo">
-        <img src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/cesar.jpg`} width="400" height="400" alt="César Andrés Santana Gereda, ingeniero mecánico y desarrollador web" fetchpriority="high" />
-      </div>
+      <figure class="portrait">
+        <img src={`${base}/cesar.jpg`} width="400" height="400" alt="César Andrés Santana Gereda, ingeniero mecánico y desarrollador" fetchpriority="high" />
+        <figcaption>
+          <strong>César Andrés Santana Gereda</strong>
+          <span>Automatización · IA · Software</span>
+        </figcaption>
+      </figure>
     </section>
 
-    <section id="servicios" class="reveal">
-      <h2>Qué puedo hacer por tu empresa</h2>
-      <div class="grid">
-        {services.map((v) => (
-          <article class="card tilt"><div class="ico">{v.icon}</div><h3>{v.title}</h3><p>{v.text}</p></article>
+    <section id="servicios" class="wrap section">
+      <header class="head">
+        <p class="kicker">Servicios</p>
+        <h2>Qué puedo hacer por tu empresa</h2>
+      </header>
+      <div class="grid g4">
+        {services.map((s) => (
+          <article class="card fade">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" set:html={icons[s.icon]} />
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
         ))}
       </div>
     </section>
 
-    <section id="proceso" class="reveal">
-      <h2>Cómo trabajo</h2>
-      <ol class="steps">
-        {steps.map(([n, t, d]) => (<li><span class="num">{n}</span><h3>{t}</h3><p>{d}</p></li>))}
-      </ol>
-    </section>
-
-    <section id="proyectos" class="reveal">
-      <h2>Proyectos destacados</h2>
-      <div class="featured">
+    <section id="proyectos" class="wrap section">
+      <header class="head">
+        <p class="kicker">Proyectos</p>
+        <h2>Trabajo para clientes</h2>
+      </header>
+      <div class="grid g2">
         {featured.map((f) => (
-          <article class="card feat tilt">
-            <div class="feat-top"><span class="tag">{f.tag}</span><span class="client">Cliente: {f.client}</span></div>
+          <article class="card feat fade">
+            <div class="row"><span class="tag">{f.tag}</span><span class="client">Cliente · {f.client}</span></div>
             <h3>{f.name}</h3>
             <p>{f.text}</p>
             <ul class="chips">{f.chips.map((c) => <li>{c}</li>)}</ul>
           </article>
         ))}
       </div>
-      <h3 class="sub">Laboratorio de automatización con IA <a class="repo" href={labRepo} target="_blank" rel="noopener">Ver código en GitHub ↗</a></h3>
-      <div class="grid">
+
+      <div class="subhead">
+        <h3>Laboratorio de automatización con IA</h3>
+        <a class="link" href={labRepo} target="_blank" rel="noopener">Ver código en GitHub →</a>
+      </div>
+      <div class="grid g3">
         {lab.map((l) => (
-          <article class="card tilt">
-            <span class="tag">Prototipo · Python</span>
+          <article class="card fade">
+            <span class="tag muted-tag">Prototipo · código abierto</span>
             <h3>{l.name}</h3>
             <p>{l.text}</p>
             <ul class="chips">{l.chips.map((c) => <li>{c}</li>)}</ul>
           </article>
         ))}
       </div>
-      <h3 class="sub">Otros proyectos</h3>
-      <div class="grid">
-        {projects.map((p) => (
-          <article class="card tilt"><span class="tag">{p.tag}</span><h3>{p.name}</h3><p>{p.text}</p></article>
-        ))}
-      </div>
+
+      <details class="more">
+        <summary>Otros proyectos ({projects.length})</summary>
+        <ul class="list">
+          {projects.map((p) => <li><strong>{p.name}</strong> <span class="tag muted-tag">{p.tag}</span><p>{p.text}</p></li>)}
+        </ul>
+      </details>
     </section>
 
-    <section id="habilidades" class="reveal">
-      <h2>Tecnologías</h2>
-      <div class="grid skills">
-        {skills.map((s) => (
-          <div class="card"><h3>{s.group}</h3><ul class="chips">{s.items.map((i) => <li>{i}</li>)}</ul></div>
-        ))}
-      </div>
-    </section>
-
-    <section id="sobre-mi" class="reveal">
-      <h2>Sobre mí</h2>
-      <p>Soy ingeniero mecánico con formación en desarrollo de software y ciencia de datos. Me gusta resolver problemas reales y aprender rápido: pasé de diseñar piezas y simulaciones a automatizar procesos empresariales con código e IA.</p>
-      <p>También soy docente: llevo años explicando temas técnicos con claridad, y eso se nota al trabajar con equipos que no son técnicos.</p>
-      <ul class="stats">
-        <li><strong data-count="10">0</strong><span>años de docencia y asesoría</span></li>
-        <li><strong data-count="13">0</strong><span>certificaciones</span></li>
-        <li><strong data-count="10">0</strong><span>proyectos desarrollados</span></li>
-      </ul>
-    </section>
-
-    <section id="experiencia" class="reveal">
-      <h2>Experiencia</h2>
-      <ol class="timeline">
-        {experience.map((e) => (
-          <li><span class="when">{e.when}</span><h3>{e.role} <small>· {e.org}</small></h3><p>{e.text}</p></li>
+    <section id="proceso" class="wrap section">
+      <header class="head">
+        <p class="kicker">Método</p>
+        <h2>Cómo trabajo</h2>
+      </header>
+      <ol class="steps">
+        {steps.map(([n, t, d]) => (
+          <li class="fade"><span class="num">{n}</span><h3>{t}</h3><p>{d}</p></li>
         ))}
       </ol>
-      <h3 class="sub">Educación y certificaciones</h3>
-      <ul class="edu">{education.map((e) => <li>{e}</li>)}</ul>
-      <p class="muted">Idiomas: español nativo, inglés A2.</p>
     </section>
 
-    <section id="contacto" class="reveal contact">
-      <h2>¿Automatizamos tu proceso?</h2>
-      <p>Cuéntame qué tarea te quita más tiempo y te digo cómo se puede resolver.</p>
-      <div class="buttons">
-        <a class="btn primary" href="mailto:casgereda.1@gmail.com?subject=Quiero%20contratar%20un%20servicio%20de%20automatizaci%C3%B3n">casgereda.1@gmail.com</a>
-        <a class="btn" href="https://www.linkedin.com/in/césar-andres-santana-gereda-01381b122" rel="me noopener" target="_blank">LinkedIn</a>
-        <a class="btn" href="https://github.com/avancemoscol" rel="me noopener" target="_blank">GitHub</a>
+    <section id="sobre-mi" class="wrap section about">
+      <div>
+        <header class="head">
+          <p class="kicker">Sobre mí</p>
+          <h2>Ingeniero que resuelve problemas con código</h2>
+        </header>
+        <p>Soy ingeniero mecánico con formación en desarrollo de software y ciencia de datos. Pasé de diseñar piezas y simulaciones a automatizar procesos empresariales con código e inteligencia artificial.</p>
+        <p>También soy docente: llevo años explicando temas técnicos con claridad, y eso se nota cuando trabajo con equipos que no son técnicos.</p>
+        <ul class="stats">
+          {stats.map(([n, l]) => <li><strong>{n}</strong><span>{l}</span></li>)}
+        </ul>
+      </div>
+      <div class="stack">
+        {skills.map((s) => (
+          <div class="stack-row">
+            <h3>{s.group}</h3>
+            <ul class="chips">{s.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="experiencia" class="wrap section two">
+      <div>
+        <header class="head">
+          <p class="kicker">Trayectoria</p>
+          <h2>Experiencia</h2>
+        </header>
+        <ol class="timeline">
+          {experience.map((e) => (
+            <li><span class="when">{e.when}</span><h3>{e.role}</h3><p class="org">{e.org}</p><p>{e.text}</p></li>
+          ))}
+        </ol>
+      </div>
+      <div>
+        <header class="head">
+          <p class="kicker">Formación</p>
+          <h2>Educación</h2>
+        </header>
+        <ul class="edu">
+          {education.map(([t, i]) => <li><strong>{t}</strong><span>{i}</span></li>)}
+        </ul>
+        <p class="muted">Idiomas: español nativo · inglés A2</p>
+      </div>
+    </section>
+
+    <section id="contacto" class="wrap section">
+      <div class="cta">
+        <h2>¿Qué tarea te está quitando más tiempo?</h2>
+        <p>Cuéntamela y te digo cómo se puede automatizar.</p>
+        <div class="buttons center">
+          <a class="btn primary" href={mailto}>Escríbeme: {email}</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/césar-andres-santana-gereda-01381b122" rel="me noopener" target="_blank">LinkedIn</a>
+          <a class="btn ghost" href="https://github.com/avancemoscol" rel="me noopener" target="_blank">GitHub</a>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>© {new Date().getFullYear()} César Andrés Santana Gereda · Bucaramanga, Colombia</footer>
+  <footer class="wrap foot">
+    <span>© {new Date().getFullYear()} César Andrés Santana Gereda</span>
+    <span>Automatización de procesos con software e IA · Bucaramanga, Colombia</span>
+  </footer>
 
   <style is:global>
-    :root { --bg:#0b1020; --card:#121935; --text:#e8ecff; --muted:#9aa5d1; --a:#6ee7f9; --b:#a78bfa; }
-    * { box-sizing:border-box; margin:0; }
-    html { scroll-behavior:smooth; }
-    body { background:var(--bg); color:var(--text); font:17px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
-    #bg { position:fixed; inset:0; z-index:-1; width:100%; height:100%; }
-    a { color:inherit; text-decoration:none; }
-    main, .nav, footer { max-width:1040px; margin-inline:auto; padding-inline:20px; }
-    section { padding-block:72px; }
-    h2 { font-size:2rem; margin-bottom:20px; }
-    h2::after { content:""; display:block; width:56px; height:4px; margin-top:8px; border-radius:4px; background:linear-gradient(90deg,var(--a),var(--b)); }
-    p + p { margin-top:12px; }
-    .nav { position:sticky; top:0; z-index:10; display:flex; justify-content:space-between; align-items:center; padding-block:14px; backdrop-filter:blur(12px); background:rgba(11,16,32,.6); max-width:none; padding-inline:max(20px,calc((100% - 1040px)/2 + 20px)); }
-    .logo { font-weight:800; font-size:1.2rem; padding:6px 12px; border-radius:10px; background:linear-gradient(135deg,var(--a),var(--b)); color:#0b1020; }
-    .nav nav { display:flex; gap:18px; align-items:center; font-size:.95rem; }
-    .nav nav a:hover { color:var(--a); }
-    .nav .cta { padding:6px 14px; border:1px solid var(--a); border-radius:999px; }
-    .hero { min-height:88vh; display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:center; }
-    .eyebrow { color:var(--a); letter-spacing:.12em; text-transform:uppercase; font-size:.85rem; }
-    h1 { font-size:clamp(2.4rem,6vw,4.2rem); line-height:1.1; margin:8px 0 14px; }
-    .grad { background:linear-gradient(90deg,var(--a),var(--b)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-    .typing { font-size:1.25rem; color:var(--muted); }
-    .typing .role, .typing .typed-line { display:block; height:1.8em; line-height:1.8em; white-space:nowrap; overflow:hidden; }
-    .typed-line { color:var(--a); }
-    .caret { animation:blink 1s steps(1) infinite; color:var(--a); }
-    @keyframes blink { 50% { opacity:0; } }
-    .lead { margin-top:14px; color:var(--muted); max-width:52ch; }
-    .buttons { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
-    .btn { padding:12px 22px; border-radius:999px; border:1px solid rgba(255,255,255,.2); transition:transform .2s, box-shadow .2s; }
-    .btn:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(110,231,249,.25); }
-    .btn.primary { background:linear-gradient(135deg,var(--a),var(--b)); color:#0b1020; font-weight:700; border:0; }
-    .photo { justify-self:center; padding:6px; border-radius:50%; background:conic-gradient(from 0deg,var(--a),var(--b),var(--a)); animation:spin 8s linear infinite; }
-    .photo img { display:block; width:min(320px,70vw); height:auto; aspect-ratio:1; object-fit:cover; border-radius:50%; border:6px solid var(--bg); animation:spin 8s linear infinite reverse; }
-    @keyframes spin { to { transform:rotate(360deg); } }
-    .stats { display:flex; flex-wrap:wrap; gap:16px; list-style:none; padding:0; margin-top:28px; }
-    .stats li { flex:1 1 180px; background:var(--card); padding:18px; border-radius:16px; }
-    .stats strong { display:block; font-size:2.2rem; color:var(--a); }
-    .stats strong::after { content:"+"; }
-    .stats span, .muted { color:var(--muted); font-size:.95rem; }
-    .timeline { list-style:none; padding:0 0 0 22px; border-left:2px solid rgba(167,139,250,.4); }
-    .timeline li { position:relative; padding:0 0 28px 18px; }
-    .timeline li::before { content:""; position:absolute; left:-30px; top:8px; width:14px; height:14px; border-radius:50%; background:var(--a); box-shadow:0 0 12px var(--a); }
-    .when { color:var(--a); font-size:.85rem; }
-    .timeline h3 small { font-weight:400; color:var(--muted); }
-    .featured { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:20px; }
-    .feat { padding:28px; background:linear-gradient(160deg,rgba(110,231,249,.08),var(--card) 55%); border-color:rgba(110,231,249,.25); }
-    .feat h3 { font-size:1.25rem; }
-    .feat-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }
-    .client { font-size:.8rem; color:var(--muted); }
-    .sub { margin:36px 0 14px; color:var(--muted); font-size:1.05rem; font-weight:600; }
-    .repo { margin-left:10px; font-size:.85rem; font-weight:500; color:var(--a); }
-    .trust { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
-    .trust li { font-size:.82rem; padding:4px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.15); color:var(--muted); }
-    .ico { font-size:1.8rem; }
-    .steps { list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:18px; }
-    .steps li { background:var(--card); border-radius:18px; padding:22px; border-top:3px solid var(--a); }
-    .num { font-size:1.6rem; font-weight:800; color:var(--b); }
-    .steps p { color:var(--muted); font-size:.95rem; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
-    .card { background:var(--card); padding:22px; border-radius:18px; border:1px solid rgba(255,255,255,.06); transition:transform .15s ease, border-color .2s; will-change:transform; }
-    .card:hover { border-color:var(--a); }
-    .tag { font-size:.75rem; padding:2px 10px; border-radius:999px; background:rgba(167,139,250,.2); color:var(--b); }
-    .card h3 { margin:10px 0 6px; }
-    .card p { color:var(--muted); font-size:.95rem; }
-    .chips { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-    .chips li { padding:3px 12px; border-radius:999px; background:rgba(110,231,249,.1); color:var(--a); font-size:.88rem; }
-    .edu { padding-left:20px; }
-    .edu li { margin-bottom:6px; }
-    .contact { text-align:center; }
-    .contact h2::after { margin-inline:auto; }
-    .contact .buttons { justify-content:center; }
-    footer { text-align:center; color:var(--muted); font-size:.9rem; padding-block:32px; }
-    .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s, transform .7s; }
-    .reveal.in { opacity:1; transform:none; }
-    @media (max-width:760px) { .hero { grid-template-columns:1fr; text-align:center; padding-top:30px; } .lead { margin-inline:auto; } .buttons { justify-content:center; } .photo { order:-1; } .nav nav a:not(.cta) { display:none; } }
-    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none !important; transition:none !important; } .reveal { opacity:1; transform:none; } }
-    @media (scripting:none) { .reveal { opacity:1; transform:none; } }
+    :root {
+      --bg: #070b16; --bg2: #0c1224; --card: #0f172b; --line: rgba(148, 163, 184, .14);
+      --text: #e6eaf5; --muted: #94a0bd; --a: #5eead4; --b: #818cf8;
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+    body { background: var(--bg); color: var(--text); font: 16.5px/1.7 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    h1, h2, h3, .brand-name { font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif; letter-spacing: -.02em; line-height: 1.15; }
+    a { color: inherit; text-decoration: none; }
+    ul, ol { list-style: none; padding: 0; }
+    .wrap { width: 100%; max-width: 1120px; margin-inline: auto; padding-inline: 20px; }
+
+    /* Fondo fijo: no depende del alto de pantalla ni de JavaScript */
+    .bg { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(600px 400px at 85% -5%, rgba(129, 140, 248, .18), transparent 70%),
+        radial-gradient(500px 380px at -5% 20%, rgba(94, 234, 212, .12), transparent 70%),
+        linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 56px 56px,
+        linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 56px 56px;
+      mask-image: linear-gradient(180deg, #000 0%, transparent 70%); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%); }
+
+    .nav { position: sticky; top: 0; z-index: 20; background: rgba(7, 11, 22, .72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav-in { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; font-weight: 800; font-size: .9rem; color: #06101a; background: linear-gradient(135deg, var(--a), var(--b)); }
+    .nav nav { display: flex; align-items: center; gap: 26px; font-size: .94rem; color: var(--muted); }
+    .nav nav a:not(.btn):hover { color: var(--text); }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 22px; border-radius: 12px; font-weight: 600; font-size: .96rem; transition: background-color .2s, border-color .2s, box-shadow .2s; }
+    .btn.primary { background: linear-gradient(135deg, var(--a), var(--b)); color: #06101a; }
+    .btn.primary:hover { box-shadow: 0 10px 30px -8px rgba(94, 234, 212, .55); }
+    .btn.ghost { border: 1px solid var(--line); background: rgba(255, 255, 255, .02); }
+    .btn.ghost:hover { border-color: rgba(94, 234, 212, .5); }
+    .btn-sm { padding: 8px 16px; font-size: .88rem; }
+    .nav .btn.primary { color: #06101a; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .buttons.center { justify-content: center; }
+
+    .hero { display: grid; grid-template-columns: 1.35fr 1fr; gap: 56px; align-items: center; padding-block: 88px 72px; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; color: var(--muted); background: rgba(255, 255, 255, .03); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 4px rgba(52, 211, 153, .18); }
+    h1 { font-size: clamp(2.3rem, 5.2vw, 3.9rem); margin: 22px 0 20px; font-weight: 700; }
+    .grad { background: linear-gradient(90deg, var(--a), var(--b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { font-size: 1.12rem; color: var(--muted); max-width: 56ch; }
+    .lead strong { color: var(--text); font-weight: 600; }
+
+    /* Palabras rotativas: todas ocupan la misma celda, así la caja nunca cambia de tamaño */
+    .rotator { display: inline-grid; vertical-align: bottom; color: var(--a); font-weight: 600; }
+    .rotator .word { grid-area: 1 / 1; white-space: nowrap; opacity: 0; transition: opacity .45s ease; }
+    .rotator .word.on { opacity: 1; }
+
+    .trust { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 28px; font-size: .88rem; color: var(--muted); }
+    .trust li::before { content: '✓'; color: var(--a); margin-right: 6px; font-weight: 700; }
+
+    .portrait { position: relative; justify-self: center; width: min(360px, 100%); padding: 10px; border-radius: 28px; background: linear-gradient(160deg, rgba(94, 234, 212, .35), rgba(129, 140, 248, .25) 50%, rgba(255, 255, 255, .04)); box-shadow: 0 40px 80px -30px rgba(129, 140, 248, .45); }
+    .portrait img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 20px; }
+    .portrait figcaption { position: absolute; left: 22px; right: 22px; bottom: 22px; display: flex; flex-direction: column; padding: 12px 16px; border-radius: 14px; background: rgba(7, 11, 22, .78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--line); font-size: .9rem; line-height: 1.4; }
+    .portrait figcaption span { color: var(--muted); font-size: .82rem; }
+
+    .section { padding-block: 72px; }
+    .head { margin-bottom: 34px; max-width: 640px; }
+    .kicker { color: var(--a); font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px; }
+    h2 { font-size: clamp(1.75rem, 3.4vw, 2.5rem); font-weight: 700; }
+
+    .grid { display: grid; gap: 18px; }
+    .g2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+    .g3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+    .g4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+    .card { background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .01)), var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; transition: border-color .25s, box-shadow .25s; }
+    .card:hover { border-color: rgba(94, 234, 212, .4); box-shadow: 0 20px 40px -24px rgba(94, 234, 212, .35); }
+    .card h3 { font-size: 1.15rem; margin: 14px 0 8px; }
+    .card p { color: var(--muted); font-size: .95rem; }
+    .ico { width: 42px; height: 42px; padding: 9px; border-radius: 12px; background: rgba(94, 234, 212, .1); stroke: var(--a); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+    .feat { padding: 30px; background: radial-gradient(400px 200px at 0% 0%, rgba(94, 234, 212, .1), transparent 70%), var(--card); }
+    .feat h3 { font-size: 1.35rem; }
+    .row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .tag { display: inline-block; font-size: .74rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: rgba(129, 140, 248, .15); color: #a5b4fc; }
+    .muted-tag { background: rgba(148, 163, 184, .12); color: var(--muted); }
+    .client { font-size: .82rem; color: var(--muted); }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+    .chips li { font-size: .8rem; padding: 3px 10px; border-radius: 8px; border: 1px solid var(--line); color: #cbd5e1; }
+
+    .subhead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 52px 0 18px; }
+    .subhead h3 { font-size: 1.3rem; }
+    .link { color: var(--a); font-weight: 600; font-size: .92rem; }
+    .link:hover { text-decoration: underline; }
+
+    .more { margin-top: 28px; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; background: rgba(255, 255, 255, .015); }
+    .more summary { cursor: pointer; font-weight: 600; color: var(--muted); }
+    .more summary:hover { color: var(--text); }
+    .list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 16px 28px; margin-top: 18px; }
+    .list p { color: var(--muted); font-size: .92rem; }
+
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 18px; counter-reset: s; }
+    .steps li { position: relative; padding: 26px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--card); }
+    .num { font-family: 'Space Grotesk', sans-serif; font-size: .9rem; font-weight: 700; color: var(--a); }
+    .steps h3 { margin: 10px 0 6px; font-size: 1.12rem; }
+    .steps p { color: var(--muted); font-size: .94rem; }
+
+    .about { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+    .about > div > p { color: var(--muted); }
+    .about > div > p + p { margin-top: 14px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 32px; }
+    .stats li { padding: 18px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); }
+    .stats strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 2rem; line-height: 1.1; background: linear-gradient(90deg, var(--a), var(--b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .stats span { color: var(--muted); font-size: .84rem; line-height: 1.35; display: block; margin-top: 6px; }
+    .stack { display: grid; gap: 14px; padding: 26px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--card); }
+    .stack-row + .stack-row { padding-top: 14px; border-top: 1px solid var(--line); }
+    .stack h3 { font-size: .95rem; color: var(--muted); font-weight: 600; }
+    .stack .chips { margin-top: 10px; }
+
+    .two { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; }
+    .timeline { border-left: 1px solid var(--line); padding-left: 26px; }
+    .timeline li { position: relative; padding-bottom: 28px; }
+    .timeline li::before { content: ''; position: absolute; left: -32px; top: 7px; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 2px solid var(--a); }
+    .when { font-size: .8rem; color: var(--a); font-weight: 600; }
+    .timeline h3 { font-size: 1.08rem; margin-top: 2px; }
+    .org { color: #cbd5e1; font-size: .9rem; }
+    .timeline p:last-child { color: var(--muted); font-size: .94rem; margin-top: 4px; }
+    .edu { display: grid; gap: 12px; }
+    .edu li { padding: 16px 18px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); display: flex; flex-direction: column; }
+    .edu span { color: var(--muted); font-size: .88rem; }
+    .muted { color: var(--muted); font-size: .9rem; margin-top: 16px; }
+
+    .cta { text-align: center; padding: 64px 28px; border-radius: 28px; border: 1px solid rgba(94, 234, 212, .25); background: radial-gradient(600px 260px at 50% 0%, rgba(94, 234, 212, .14), transparent 70%), radial-gradient(500px 260px at 50% 100%, rgba(129, 140, 248, .14), transparent 70%), var(--bg2); }
+    .cta p { color: var(--muted); margin: 14px auto 0; max-width: 52ch; }
+
+    .foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-block: 34px 44px; border-top: 1px solid var(--line); color: var(--muted); font-size: .86rem; }
+
+    /* Aparición suave SOLO con opacidad: no mueve nada de lugar, así no hay saltos al hacer scroll */
+    .js .fade { opacity: 0; transition: opacity .6s ease; }
+    .js .fade.in { opacity: 1; }
+
+    @media (max-width: 900px) {
+      .hero, .about, .two { grid-template-columns: 1fr; gap: 40px; }
+      .hero { padding-top: 48px; }
+      .portrait { order: -1; width: min(300px, 100%); }
+      .nav nav a:not(.btn) { display: none; }
+    }
+    @media (max-width: 520px) {
+      .brand-name { display: none; }
+      .stats { grid-template-columns: 1fr; }
+      .buttons .btn { width: 100%; }
+      .rotator { display: grid; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+      .js .fade { opacity: 1; }
+    }
   </style>
 
   <script>
-    // Texto animado
-    const words = ['Automatización de procesos', 'Desarrollador Web', 'Analista de Datos', 'Diseñador CAD', 'Docente'];
-    const el = document.getElementById('typed')!;
+    document.documentElement.classList.add('js');
+
+    // Palabras rotativas (solo cambia la opacidad, el tamaño de la caja es fijo)
+    const words = [...document.querySelectorAll<HTMLElement>('.rotator .word')];
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) el.textContent = words[0];
-    else {
-      let w = 0, c = 0, del = false;
-      const tick = () => {
-        const word = words[w];
-        el.textContent = word.slice(0, c);
-        if (!del && c === word.length) { del = true; return setTimeout(tick, 1400); }
-        if (del && c === 0) { del = false; w = (w + 1) % words.length; }
-        c += del ? -1 : 1;
-        setTimeout(tick, del ? 40 : 80);
-      };
-      tick();
+    if (words.length > 1 && !reduce) {
+      let i = 0;
+      setInterval(() => {
+        words[i].classList.remove('on');
+        i = (i + 1) % words.length;
+        words[i].classList.add('on');
+      }, 2600);
     }
 
-    // Aparición al hacer scroll y contadores
+    // Aparición al hacer scroll: solo opacidad, sin desplazar el contenido
     const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (!e.isIntersecting) continue;
-        e.target.classList.add('in');
-        e.target.querySelectorAll<HTMLElement>('[data-count]').forEach((n) => {
-          const target = Number(n.dataset.count);
-          let v = 0;
-          const step = setInterval(() => { v++; n.textContent = String(v); if (v >= target) clearInterval(step); }, 90);
-        });
-        io.unobserve(e.target);
-      }
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal').forEach((s) => io.observe(s));
-
-    // Inclinación 3D en tarjetas
-    if (!reduce) document.querySelectorAll<HTMLElement>('.tilt').forEach((card) => {
-      card.addEventListener('mousemove', (ev) => {
-        const r = card.getBoundingClientRect();
-        const x = (ev.clientX - r.left) / r.width - 0.5, y = (ev.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(600px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
-      });
-      card.addEventListener('mouseleave', () => (card.style.transform = ''));
-    });
-
-    // Fondo de partículas
-    const cv = document.getElementById('bg') as HTMLCanvasElement;
-    const ctx = cv.getContext('2d')!;
-    let W = 0, H = 0;
-    const pts = Array.from({ length: 60 }, () => ({ x: Math.random(), y: Math.random(), vx: (Math.random() - .5) * 2e-4, vy: (Math.random() - .5) * 2e-4 }));
-    const resize = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; };
-    addEventListener('resize', resize); resize();
-    const draw = () => {
-      ctx.clearRect(0, 0, W, H);
-      for (const p of pts) { p.x = (p.x + p.vx + 1) % 1; p.y = (p.y + p.vy + 1) % 1; }
-      for (let i = 0; i < pts.length; i++) {
-        const a = pts[i];
-        ctx.fillStyle = 'rgba(110,231,249,.6)';
-        ctx.fillRect(a.x * W, a.y * H, 2, 2);
-        for (let j = i + 1; j < pts.length; j++) {
-          const b = pts[j], d = Math.hypot((a.x - b.x) * W, (a.y - b.y) * H);
-          if (d < 140) { ctx.strokeStyle = `rgba(167,139,250,${.25 * (1 - d / 140)})`; ctx.beginPath(); ctx.moveTo(a.x * W, a.y * H); ctx.lineTo(b.x * W, b.y * H); ctx.stroke(); }
-        }
-      }
-      if (!reduce) requestAnimationFrame(draw);
-    };
-    draw();
+      for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.fade').forEach((el) => io.observe(el));
   </script>
 </Base>

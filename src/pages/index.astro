@@ -30,6 +30,18 @@ const projects = [
   { name: 'VTH, centrifugadora y domo', tag: 'Ingeniería', text: 'Vehículo de tracción humana, centrifugadora de miel y domo geodésico.' },
   { name: 'Sistema agroforestal de cacao', tag: 'Datos', text: 'Análisis de datos para captura de carbono en cultivos de cacao.' },
 ];
+const services = [
+  { icon: '⚙️', title: 'Automatización de procesos', text: 'Elimino tareas manuales repetitivas: facturación electrónica, acuses ante la DIAN, conciliaciones y reportes.' },
+  { icon: '🤖', title: 'Soluciones con IA', text: 'Integro modelos de lenguaje para extraer datos de documentos, clasificarlos y apoyar decisiones, con validaciones para que sea confiable.' },
+  { icon: '📊', title: 'Sistemas contables a la medida', text: 'Software para llevar la contabilidad de tu empresa, adaptado a cómo trabajas y no al revés.' },
+  { icon: '🌐', title: 'Aplicaciones web y APIs', text: 'Desarrollo con JavaScript, Node.js, React, Python y bases de datos SQL y NoSQL.' },
+];
+const steps = [
+  ['01', 'Diagnóstico', 'Entiendo tu proceso actual y dónde se pierde tiempo o dinero.'],
+  ['02', 'Prototipo', 'Construyo una versión funcional pequeña para validar la idea rápido.'],
+  ['03', 'Implementación', 'Desarrollo, pruebo e integro con tus herramientas y tu equipo.'],
+  ['04', 'Acompañamiento', 'Capacito a tu equipo y ajusto el sistema según el uso real.'],
+];
 const education = [
   'Ingeniería Mecánica · Universidad Industrial de Santander',
   'Diplomado en Desarrollo de Software · Universidad del Norte (MinTIC)',
@@ -43,10 +55,10 @@ const education = [
   <header class="nav">
     <a href="#inicio" class="logo">CS</a>
     <nav aria-label="Principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#proyectos">Proyectos</a>
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#experiencia">Experiencia</a>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#habilidades">Habilidades</a>
       <a href="#contacto" class="cta">Contacto</a>
     </nav>
   </header>
@@ -54,41 +66,34 @@ const education = [
   <main>
     <section id="inicio" class="hero">
       <div class="hero-text">
-        <p class="eyebrow">Bucaramanga, Colombia</p>
+        <p class="eyebrow">Disponible para proyectos · Bucaramanga, Colombia</p>
         <h1>César Andrés<br /><span class="grad">Santana Gereda</span></h1>
         <p class="typing"><span class="role">Ingeniero Mecánico</span><span class="typed-line"><span id="typed"></span><span class="caret">|</span></span></p>
-        <p class="lead">Ingeniero mecánico y desarrollador que automatiza procesos empresariales con software, datos e inteligencia artificial: soluciones reales para empresas reales.</p>
+        <p class="lead">Ayudo a las empresas a ahorrar tiempo y reducir errores automatizando sus procesos con software, datos e inteligencia artificial.</p>
         <div class="buttons">
-          <a class="btn primary" href="#contacto">Hablemos</a>
+          <a class="btn primary" href="mailto:casgereda.1@gmail.com?subject=Quiero%20contratar%20un%20servicio%20de%20automatizaci%C3%B3n">Contrátame</a>
           <a class="btn" href="#proyectos">Ver proyectos</a>
         </div>
+        <ul class="trust"><li>Facturación electrónica DIAN</li><li>Contabilidad</li><li>IA aplicada</li></ul>
       </div>
       <div class="photo">
         <img src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/cesar.jpg`} width="400" height="400" alt="César Andrés Santana Gereda, ingeniero mecánico y desarrollador web" fetchpriority="high" />
       </div>
     </section>
 
-    <section id="sobre-mi" class="reveal">
-      <h2>Sobre mí</h2>
-      <p>Soy César Andrés Santana Gereda, ingeniero mecánico apasionado por la mejora continua de procesos y la innovación en el diseño. Soy autodidacta y me adapto rápido a nuevas tecnologías y desafíos.</p>
-      <p>Trabajo como diseñador e instructor independiente y fui asesor académico durante mi formación universitaria. Hoy sumo desarrollo web, ciencia de datos y machine learning a mi perfil de ingeniería.</p>
-      <ul class="stats">
-        <li><strong data-count="10">0</strong><span>años de docencia y asesoría</span></li>
-        <li><strong data-count="5">0</strong><span>proyectos destacados</span></li>
-        <li><strong data-count="13">0</strong><span>certificaciones</span></li>
-      </ul>
+    <section id="servicios" class="reveal">
+      <h2>Qué puedo hacer por tu empresa</h2>
+      <div class="grid">
+        {services.map((v) => (
+          <article class="card tilt"><div class="ico">{v.icon}</div><h3>{v.title}</h3><p>{v.text}</p></article>
+        ))}
+      </div>
     </section>
 
-    <section id="experiencia" class="reveal">
-      <h2>Experiencia</h2>
-      <ol class="timeline">
-        {experience.map((e) => (
-          <li>
-            <span class="when">{e.when}</span>
-            <h3>{e.role} <small>· {e.org}</small></h3>
-            <p>{e.text}</p>
-          </li>
-        ))}
+    <section id="proceso" class="reveal">
+      <h2>Cómo trabajo</h2>
+      <ol class="steps">
+        {steps.map(([n, t, d]) => (<li><span class="num">{n}</span><h3>{t}</h3><p>{d}</p></li>))}
       </ol>
     </section>
 
@@ -118,40 +123,50 @@ const education = [
       <h3 class="sub">Otros proyectos</h3>
       <div class="grid">
         {projects.map((p) => (
-          <article class="card tilt">
-            <span class="tag">{p.tag}</span>
-            <h3>{p.name}</h3>
-            <p>{p.text}</p>
-          </article>
+          <article class="card tilt"><span class="tag">{p.tag}</span><h3>{p.name}</h3><p>{p.text}</p></article>
         ))}
       </div>
     </section>
 
     <section id="habilidades" class="reveal">
-      <h2>Habilidades</h2>
+      <h2>Tecnologías</h2>
       <div class="grid skills">
         {skills.map((s) => (
-          <div class="card">
-            <h3>{s.group}</h3>
-            <ul class="chips">{s.items.map((i) => <li>{i}</li>)}</ul>
-          </div>
+          <div class="card"><h3>{s.group}</h3><ul class="chips">{s.items.map((i) => <li>{i}</li>)}</ul></div>
         ))}
       </div>
     </section>
 
-    <section id="educacion" class="reveal">
-      <h2>Educación y certificaciones</h2>
+    <section id="sobre-mi" class="reveal">
+      <h2>Sobre mí</h2>
+      <p>Soy ingeniero mecánico con formación en desarrollo de software y ciencia de datos. Me gusta resolver problemas reales y aprender rápido: pasé de diseñar piezas y simulaciones a automatizar procesos empresariales con código e IA.</p>
+      <p>También soy docente: llevo años explicando temas técnicos con claridad, y eso se nota al trabajar con equipos que no son técnicos.</p>
+      <ul class="stats">
+        <li><strong data-count="10">0</strong><span>años de docencia y asesoría</span></li>
+        <li><strong data-count="13">0</strong><span>certificaciones</span></li>
+        <li><strong data-count="10">0</strong><span>proyectos desarrollados</span></li>
+      </ul>
+    </section>
+
+    <section id="experiencia" class="reveal">
+      <h2>Experiencia</h2>
+      <ol class="timeline">
+        {experience.map((e) => (
+          <li><span class="when">{e.when}</span><h3>{e.role} <small>· {e.org}</small></h3><p>{e.text}</p></li>
+        ))}
+      </ol>
+      <h3 class="sub">Educación y certificaciones</h3>
       <ul class="edu">{education.map((e) => <li>{e}</li>)}</ul>
       <p class="muted">Idiomas: español nativo, inglés A2.</p>
     </section>
 
     <section id="contacto" class="reveal contact">
-      <h2>Contacto</h2>
-      <p>¿Tienes un proyecto de ingeniería, datos o web? Escríbeme.</p>
+      <h2>¿Automatizamos tu proceso?</h2>
+      <p>Cuéntame qué tarea te quita más tiempo y te digo cómo se puede resolver.</p>
       <div class="buttons">
-        <a class="btn primary" href="mailto:casgereda.1@gmail.com">casgereda.1@gmail.com</a>
+        <a class="btn primary" href="mailto:casgereda.1@gmail.com?subject=Quiero%20contratar%20un%20servicio%20de%20automatizaci%C3%B3n">casgereda.1@gmail.com</a>
         <a class="btn" href="https://www.linkedin.com/in/césar-andres-santana-gereda-01381b122" rel="me noopener" target="_blank">LinkedIn</a>
-        <a class="btn" href="https://github.com/andressantage" rel="me noopener" target="_blank">GitHub</a>
+        <a class="btn" href="https://github.com/avancemoscol" rel="me noopener" target="_blank">GitHub</a>
       </div>
     </section>
   </main>
@@ -209,6 +224,13 @@ const education = [
     .client { font-size:.8rem; color:var(--muted); }
     .sub { margin:36px 0 14px; color:var(--muted); font-size:1.05rem; font-weight:600; }
     .repo { margin-left:10px; font-size:.85rem; font-weight:500; color:var(--a); }
+    .trust { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+    .trust li { font-size:.82rem; padding:4px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.15); color:var(--muted); }
+    .ico { font-size:1.8rem; }
+    .steps { list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:18px; }
+    .steps li { background:var(--card); border-radius:18px; padding:22px; border-top:3px solid var(--a); }
+    .num { font-size:1.6rem; font-weight:800; color:var(--b); }
+    .steps p { color:var(--muted); font-size:.95rem; }
     .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
     .card { background:var(--card); padding:22px; border-radius:18px; border:1px solid rgba(255,255,255,.06); transition:transform .15s ease, border-color .2s; will-change:transform; }
     .card:hover { border-color:var(--a); }
